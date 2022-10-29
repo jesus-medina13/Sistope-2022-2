@@ -1,0 +1,12 @@
+CC=gcc
+CFLAGS= -lm
+OBJS= lab1.o
+
+lab1: $(OBJS)
+	$(CC) -o lab1 $(OBJS) $(CFLAGS)
+
+lab1.o: lab1.c
+	$(CC) -c lab1.c
+
+clean:
+	rm $(OBJS)

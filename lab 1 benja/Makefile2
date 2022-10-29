@@ -1,0 +1,12 @@
+CC=gcc
+CFLAGS= -lm
+OBJS= vis.o
+
+vis: $(OBJS)
+	$(CC) -o vis $(OBJS) $(CFLAGS)
+
+vis.o: vis.c
+	$(CC) -c vis.c
+
+clean:
+	rm $(OBJS)
