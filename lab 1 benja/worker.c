@@ -12,7 +12,9 @@ typedef struct resultadoYear{
 	int y;
 	int canJuegos;
 	int idCaro;
+	float pCaro;
 	int idBarato;
+	float pBarato;
 	float pPromedio;
 	float w;
 	float m;
@@ -20,12 +22,14 @@ typedef struct resultadoYear{
 	struct resultadoYear * sig;
 }resultadoYear;
 
-resultadoYear * crearResultado(int y, int canJuegos, int idCaro, int idBarato, float pPromedio,	float w, float m, float l){
+resultadoYear * crearResultado(int y, int canJuegos, int idCaro, float pCaro, int idBarato, float pBarato, float pPromedio,	float w, float m, float l){
 	resultadoYear * newRes = malloc(sizeof(resultadoYear));
 	newRes->y = y;
 	newRes->canJuegos = canJuegos;
 	newRes->idCaro = idCaro;
+	newRes->pCaro = pCaro;
 	newRes->idBarato = idBarato;
+	newRes->pBarato = pBarato;
 	newRes->pPromedio = pPromedio;
 	newRes->w = w;
 	newRes->m = m;
@@ -50,7 +54,7 @@ resultadoYear * insertarResultado(resultadoYear * lista, resultadoYear * res){
 	return lista;	
 }
 
-int revisarYear(resultadoYear * lista, int year){
+int revisarYear(resultadoYear * lista, resultadoYear * year){
 	
 	resultadoYear * aux = lista;
 	if (lista == NULL)
@@ -58,8 +62,18 @@ int revisarYear(resultadoYear * lista, int year){
 		return 0;
 	}
 	while(aux != NULL){
-		if (aux->year == year)
+		if (aux->y == year->Y)
 		{
+			aux->canJuegos = aux->canJuegos + 1;
+			if(aux->pCaro < year->pCaro){
+				aux->pCaro = year->pCaro;
+				aux->idCaro = year->idCaro;
+			}else if(aux->pBarato > year->pBarato){
+				aux->pBarato = year->pBarato;
+				aux->idBarato = year->idBarato;
+			}
+			aux->pPromedio = aux->pPromedio + year->pPromedio;
+			aux->w = aux->w + year-> w;
 			return 1;
 		}
 		aux = aux->sig;
@@ -86,6 +100,9 @@ int main(int argc, char *argv[]){
 	char w[3];
 	char m[3];
 	char l[3];
+	float w2 = 0;
+	float m2 = 0;
+	float l2 = 0;
 
 	int nLineas // numero de lineas que se leen
 
@@ -164,8 +181,24 @@ int main(int argc, char *argv[]){
 				count++;
 			}
 		}
-
-		if (revisarYear(lista, year) == 0)
+		if(strcmp()){
+			w2 = 1;
+		}else{
+			w2 = 0;
+		}
+		if(strcmp()){
+			m2 = 1;
+		}else{
+			m2 = 0;
+		}
+		if(strcmp()){
+			l2 = 1;
+		}else{
+			l2 = 0;
+		}
+		
+		resultadoYear * lActual = crearResultado(year, 1, id, precio, id, precio, precio, w2, m2, l2);
+		if (revisarYear(lista, lActual) == 0) // se revisa que no este el año
 		{
 			crearResultado();
 		}
